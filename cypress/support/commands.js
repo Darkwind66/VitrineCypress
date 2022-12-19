@@ -84,7 +84,6 @@ Cypress.Commands.add('LogoVitrine',() => {
             .click()
             .url().should('eq', 'https://vitrine.globo.com/')
             .go('back')
-            .url().should('eq', 'https://vitrine.globo.com/assine/deezer-premium')        
 })
 
 
@@ -124,7 +123,7 @@ Cypress.Commands.add('FullscreenButtons_Default',() => {
     cy.get('.offer-button > .vtr-button')
         .scrollIntoView()
         .should('be.visible')
-        .and('have.text', ' Conheça as ofertas ')
+        .and('have.text', ' Conheça as ofertas')
         .click()
 
         cy.get(':nth-child(1) > .btn-filter')
@@ -169,12 +168,12 @@ Cypress.Commands.add('Button_VejaMaisOfertas',() => {
             .scrollIntoView()
             .should('be.visible')
             .click()
-            .url().should('eq', Cypress.env('VITRINE_HOME'))
+            .url().should('eq', 'https://vitrine.globo.com/')
             .go("back")        
 })
 
 
-Cypress.Commands.add('Button_FAQ()',() => {
+Cypress.Commands.add('Button_FAQ',() => {
     cy.get('.faq__title')
             .scrollIntoView()
             .should('be.visible')
@@ -191,4 +190,25 @@ Cypress.Commands.add('Button_FAQ()',() => {
             .and('contain.text', 'Saiba mais')
 })
 
+
+Cypress.Commands.add('Footer_OtherTexts', () => {
+
+
+
+})
+
+
+Cypress.Commands.add('Footer_Buttons', () => {
+    cy.get('.footer__copyright__links').children()
+        .should('have.length', 3).and('be.visible')
+    
+    cy.contains('Minha conta')
+        .should('have.prop', 'href', 'https://vitrine.globo.com/%20//minhaconta.globo.com/')
+        
+    cy.contains('Política de Privacidade')
+        .should('have.prop', 'href', "https://vitrine.globo.com/%20//privacidade.globo.com/privacy-policy/")
+        
+    cy.contains('Termos de uso')
+        .should('have.prop', 'href', 'https://vitrine.globo.com/%20//ajuda.globo/globoplay/termos-e-politicas/')
+})
 

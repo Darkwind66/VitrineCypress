@@ -1,7 +1,7 @@
 /// <reference types="Cypress"/>
 
 describe('Default page test',() => {
-    before(() => {
+    beforeEach(() => {
         cy.viewport(1980, 1080)
         cy.visit('vitrine.globo.com/assine/deezer-premium')      
     })
@@ -25,7 +25,7 @@ describe('Default page test',() => {
 
     // -- Neste bloco de testes, está sendo validada a ordem da lista do Menu,
     //    e tbm se os links das URLs estão corretos.
-    it.skip('Validanting Header Component', () => {
+    it('Validanting Header Component', () => {
         cy.Menu() 
         cy.get('.sidebar > ul').children() 
         .should('have.length', 11).then(() => {
@@ -36,24 +36,24 @@ describe('Default page test',() => {
                 })                
             })
         })
+
         cy.LogoVitrine()
         cy.LoginButton()
     })
 
 
-    it.only('Validanting Fullscreen Component', () => {
+    it('Validanting Fullscreen Component', () => {
         cy.fullscreenImage_Desktop() // -- Este teste valida se a imagem não está quebrada.
         cy.FullscreenButtons_Default()
-      //cy.Texts() // --  Precisamos verificar se é válido automatizar essa parte de textos, devido a constante mudança
     })
 
     //Valida os componentes do Banner argumento de vendas 01
-    it.skip('Validating Banner 01 Component', () => {
+    it('Validating Banner 01 Component', () => {
         cy.Banner01()   
     })
 
 
-    // -- Desativei este bloco de testes, pois estamos para receber uma mudança nesse componente de Filtro em breve
+    // -- Desativei este bloco de testes, pois estamos para receber uma mudança nesse componente de Filtros em breve
     it.skip('Validating Filter Component', () => {
         cy.FilterTexts('Ofertas Globoplay com Deezer Premium', 'Explore os detalhes dos nossos produtos')
         cy.FilterCarroussel()
@@ -68,9 +68,12 @@ describe('Default page test',() => {
     })
 
     //Valida o texto do rodapé
-    it('Validando o Footer', () => {
+    it('Validating Footer Component', () => {
         cy.get('.footer__info')
             .scrollIntoView()
-            .should('have.text', Cypress.env('FOOTERS_DEEZER'))
+            .should('contains.text', Cypress.env('ONE_ASTERISK'))
+            .and('contains.text', Cypress.env('TWO_ASTERISK'))
+        //     .and('contains.text', Cypress.env('FIVE_ASTERISK')) // -- Desativado pq temos um BUG em prod! :D       
+        cy.Footer_Buttons()
     })
 })

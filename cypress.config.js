@@ -58,20 +58,14 @@ module.exports = {
 
     USER_PASSWORD: "12345678",
 
-    //Footers das páginas:
-    FOOTERS_DEEZER:
-      "* Sinal da Globo gratuito disponível em algumas cidades nos estados: Acre, Amapá, Amazonas, Bahia, Ceará, Espírito Santo, Goiás, Maranhão, Mato Grosso, Mato Grosso do Sul, Minas Gerais, Pará, Paraná, Pernambuco, Rio de Janeiro, Rio Grande do Norte, Rio Grande do Sul, Rondônia, Roraima, Santa Catarina, São Paulo e o Distrito Federal." +
-      "** Canal gratuito no território brasileiro." +
-      "****** O benefício é válido apenas para novos assinantes Deezer Premium. Os 6 meses de free trial de Deezer Premium estão atrelados à assinatura do Globoplay. Em caso de cancelamento do Globoplay, o valor cobrado pelo pacote Deezer Premium será de R$ 19,90 mensais.",
 
-    FOOTERS_TELECINE:
-      "* Sinal da Globo gratuito disponível em algumas cidades nos estados: Acre, Amapá, Amazonas, Bahia, Ceará, Espírito Santo, Goiás, Maranhão, Mato Grosso, Mato Grosso do Sul, Minas Gerais, Pará, Paraná, Pernambuco, Rio de Janeiro, Rio Grande do Norte, Rio Grande do Sul, Rondônia, Roraima, Santa Catarina, São Paulo e o Distrito Federal." +
-      "** Canal gratuito no território brasileiro.",
+    // -- Footers: Textos das páginas:
 
-
-      FOOTERS_DISNEY:
-        "* Sinal da Globo gratuito disponível em algumas cidades nos estados: Acre, Amapá, Amazonas, Bahia, Ceará, Espírito Santo, Goiás, Maranhão, Mato Grosso, Mato Grosso do Sul, Minas Gerais, Pará, Paraná, Pernambuco, Rio de Janeiro, Rio Grande do Norte, Rio Grande do Sul, Rondônia, Roraima, Santa Catarina, São Paulo e o Distrito Federal." +
-        "** Canal gratuito no território brasileiro."
+    ONE_ASTERISK: "* Sinal da Globo gratuito disponível em algumas cidades nos estados: Acre, Amapá, Amazonas, Bahia, Ceará, Espírito Santo, Goiás, Maranhão, Mato Grosso, Mato Grosso do Sul, Minas Gerais, Pará, Paraná, Pernambuco, Rio de Janeiro, Rio Grande do Norte, Rio Grande do Sul, Rondônia, Roraima, Santa Catarina, São Paulo e o Distrito Federal.",
+    TWO_ASTERISK: "** Canal gratuito no território brasileiro.",
+    THREE_ASTERISK: "*** O Premiere, com a maior cobertura do futebol nacional, exibe os jogos ao vivo dos campeonatos estaduais (Gaúcho, Paulista*, Mineiro e Pernambucano) para seus assinantes, além da Copa do Brasil 2022 e do Campeonato Brasileiro Séries A e B 2022 dos clubes que cederam direitos à Globo (não inclui Athletico Paranaense 2022). A variedade de campeonatos e jogos disponíveis pode ser alterada, a qualquer tempo, conforme negociações de direitos pela Globo e/ou por conta da crise sanitária em decorrência da pandemia. A transmissão do Campeonato Paulista conta com 97 jogos, incluindo as fases decisivas – três jogos das quartas de final, as duas semifinais e os dois confrontos da final. Para o Campeonato Mineiro, o Premiere garante a exibição exclusiva de todos os jogos de Atlético, Cruzeiro e América, incluindo toda a fase final, com exceção das partidas em que o Cruzeiro for mandante na temporada 2022. A assinatura do Premiere está sujeita aos termos do respectivo contrato de assinatura, conforme a modalidade contratada: plano mensal por R$59,90/mês; plano anual por R$ 598,80/ano, dividido em 12 parcelas de R$ 49,90. A assinatura do plano anual dá acesso ao Premiere por 12 meses, contados a partir da sua data de assinatura. Esta oferta poderá ser contratada (i) diretamente junto à Globo (premiere.globo), através da internet, ou (ii) junto dos nossos parceiros de venda, de sua preferência, em seus diversos canais de relacionamento.",
+    FOUR_ASTERISK: "**** A assinatura do Combate está sujeita aos termos do respectivo contrato de assinatura, conforme a modalidade contratada: plano mensal por R$24,90/mês; plano anual por R$ 238,80/ano, divididos em 12 parcelas de R$ 19,90. A assinatura do plano anual dá acesso ao Combate por 12 meses, contados a partir da sua data de assinatura. Verifique a disponibilidade e as condições específicas da oferta dos planos do Combate (i) diretamente junto à Globo através da internet (combate.globo) ou (ii) junto à sua Operadora. Oferta do plano anual não disponível para contratações via loja de aplicativos da Apple. Parcelamento do plano anual não disponível para contratações via loja de aplicativos Google. Os atuais preços são exclusivos para os novos assinantes.",
+    FIVE_ASTERISK: "***** O benefício é válido apenas para novos assinantes Deezer Premium. Os 6 meses de free trial de Deezer Premium estão atrelados à assinatura do Globoplay. Em caso de cancelamento do Globoplay, o valor cobrado pelo pacote Deezer Premium será de R$ 22,90 mensais.",
   },
 
   e2e: {
