@@ -8,7 +8,7 @@ describe('Show all recommendation by elegibility', () => {
 
             var contM = 0
             var contY = 0 
-            var contZ = 0 
+            var contB = 0 
 
             for(var index in Response.body.offers){
                 var nomeDaOferta = (Response.body.offers[index].name)
@@ -30,14 +30,14 @@ describe('Show all recommendation by elegibility', () => {
                     cy.log()
                 }
 
-                if(planoAnual){
-                    contZ++
+                if(planoBianual){
+                    contB++
                     cy.log(nomeDaOferta + ' Bianual')
                     cy.log(planoAnual.sku)
                     cy.log()
                 }
             }
-            cy.log('Total de Ofertas: ', contM+contY)
+            cy.log('Total de Ofertas: ', contM+contY+contB)
 
         })
     })
@@ -50,12 +50,14 @@ describe('Show all recommendation by elegibility', () => {
 
             var contM = 0
             var contY = 0
+            var contB = 0 
 
             for(var index in Response.body.offers){
                 
                 var nomeDaOferta = (Response.body.offers[index].name)
                 var planoMensal = (Response.body.offers[index].products[0])
                 var planoAnual = (Response.body.offers[index].products[1])
+                var planoBianual = (Response.body.offers[index].products[2])
                 
                 if(planoMensal){
                     contM++
@@ -71,8 +73,14 @@ describe('Show all recommendation by elegibility', () => {
                     cy.log()
                 }
                 
+                if(planoBianual){
+                    contB++
+                    cy.log(nomeDaOferta + ' Bianual')
+                    cy.log(planoAnual.sku)
+                    cy.log()
+                }
             }
-            cy.log('Total de Ofertas: ', contM+contY)
+            cy.log('Total de Ofertas: ', contM+contY+contB)
         })
     })
 })

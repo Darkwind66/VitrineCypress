@@ -25,17 +25,17 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 
-
 Cypress.Commands.add('Menu', () => {
-        
+    // -- Valida que o botão Menu está visivel na tela, e clica para expandir a lista
     cy.get('.button-menu-container > button')
+        .should('be.visible')
         .click()
         .should('have.attr', 'aria-expanded', 'true')
     
+    // -- Valida que a lista de páginas do Menu está visivel
     cy.get('.sidebar')
         .should('be.visible')
         .and('have.class', 'active')  
-        
         
     // -- Rascunhos para melhorar a automação do MENU:        
 
@@ -77,12 +77,20 @@ Cypress.Commands.add('Menu', () => {
     
 })
 
+Cypress.Commands.add('MenuPagesRedirect', () => {
+    cy.get('ul > :nth-child(1)')
+            .should('contain.text', 'Home')
+            .click('bottomLeft')
+            .url().should('eq', 'https://vitrine-qa1.qa.globoi.com/')
+            .go('back')
+})
+
 
 Cypress.Commands.add('LogoVitrine',() => {
     cy.get('[alt="Logo Vitrine Globo"]')
             .scrollIntoView()
             .click()
-            .url().should('eq', 'https://vitrine.globo.com/')
+            .url().should('eq', 'https://vitrine-qa1.qa.globoi.com/')
             .go('back')
 })
 
@@ -119,16 +127,15 @@ Cypress.Commands.add('fullscreenImage_Desktop',() => {
 })
 
 
-Cypress.Commands.add('FullscreenButtons_Default',() => {
+Cypress.Commands.add('FullscreenButtons_Default',(textCTA) => {
     cy.get('.offer-button > .vtr-button')
         .scrollIntoView()
         .should('be.visible')
-        .and('have.text', ' Conheça as ofertas')
+        .and('have.text', textCTA)
         .click()
-
-        cy.get(':nth-child(1) > .btn-filter')
-            .scrollIntoView()
-            .should('have.class', 'active')
+        
+    // -- TODO
+    // Validar a ação scrollDown após clicar no botão
 })
 
 
@@ -145,6 +152,9 @@ Cypress.Commands.add('Banner01',() => {
             expect(img.naturalWidth).to.above(650)
             expect(img.naturalHeight).to.above(550)
         })
+    
+    // cy.get('.partner__title').should('be.visible').and(text1)  
+    // cy.get('.partner__description').should('be.visible').and(text2)  
 })
 
 
@@ -157,10 +167,29 @@ Cypress.Commands.add('FilterTexts',(Title, Subtitle) => {
             .and('have.text', Subtitle)
 })
 
-
-Cypress.Commands.add('Filter',() => {
-    // Aguardando novas atualizações para automatizar
+// -- Valida os botões do filtro para Deslogados e Logados Free
+Cypress.Commands.add('FilterDefault',() => {
+    cy.get('.filter__list').children()
+        .should('have.length', 4).then(($filt)=>{
+            expect($filt[0]).have.text(' Todos ')
+            expect($filt[0]).have.class('active')
+            expect($filt[1]).have.text(' Assinaturas globoplay ')
+            expect($filt[2]).have.text(' Ofertas combinadas ')
+        })
 })
+
+// -- Valida os botões do filtro para Assinantes Globoplay
+Cypress.Commands.add('FilterSubscriber',() => {
+    cy.get('.filter__list').children()
+        .should('have.length', 4).then(($filt)=>{
+            expect($filt[0]).have.text(' Todos ')
+            expect($filt[1]).have.class('active')
+            expect($filt[1]).have.text(' Ofertas turbinadas ')
+            expect($filt[2]).have.text(' Assinaturas globoplay ')
+            expect($filt[3]).have.text(' Ofertas combinadas ')
+        })
+})
+
 
 
 Cypress.Commands.add('Button_VejaMaisOfertas',() => {

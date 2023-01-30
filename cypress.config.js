@@ -13,7 +13,7 @@ module.exports = {
     PRD: "vitrine.globo.com",
 
     VITRINE_HOME: "https://vitrine-qa1.qa.globoi.com/",
-    LOGIN_URL: "https://login.globo.com/login",
+    LOGIN_URL: "https://login.qa.globoi.com/login",
     DEEZER_PAGE: "https://vitrine.globo.com/assine/deezer-premium",
     TELECINE_PAGE: "https://vitrine.globo.com/assine/telecine",
     DISNEY_PAGE: "https://vitrine-qa1.qa.globoi.com/assine/disney",
