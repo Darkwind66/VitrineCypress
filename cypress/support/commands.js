@@ -172,9 +172,10 @@ Cypress.Commands.add('FilterDefault',() => {
     cy.get('.filter__list').children()
         .should('have.length', 4).then(($filt)=>{
             expect($filt[0]).have.text(' Todos ')
-            expect($filt[0]).have.class('active')
-            expect($filt[1]).have.text(' Assinaturas globoplay ')
-            expect($filt[2]).have.text(' Ofertas combinadas ')
+            expect($filt[1]).have.class('active')
+            expect($filt[1]).have.text(' Ofertas turbinadas ')
+            expect($filt[2]).have.text(' Assinaturas globoplay ')
+            expect($filt[3]).have.text(' Ofertas combinadas ')
         })
 })
 
@@ -191,15 +192,57 @@ Cypress.Commands.add('FilterSubscriber',() => {
 })
 
 
+// -- Valida o botão Detalhes da Oferta no carrossel de ofertas na HOME
+Cypress.Commands.add('OfferButtonDetalhes_HOME', () => {
+    cy.get('#globoplay > .offer-card > .offer-card__front > .offer-card-front > .body > .offer-card-front__group-buttons > vtr-link.offer-card-front__group-buttons--plan > .vtr-input')
+            .click()
+            cy.url().wait(1500).should('contain', 'Pro-0279' )
+})
+
+
+// -- Valida o botão Detalhes da Oferta no carrossel de ofertas nas LPs
+Cypress.Commands.add('OfferButtonDetalhes_LP', () => {
+    cy.get('[aria-label="Filtro Todos"]').click()
+        cy.get('#splide01-slide01 > app-offer-card-new > .offer-card > .offer-card__front > .offer-card-front > .body > .offer-card-front__group-buttons > vtr-link.offer-card-front__group-buttons--plan > .vtr-input')
+            .click()
+        cy.url().wait(1500).should('contain', 'Pro-0279')
+})
+
+
+// -- Valida o botão Assine já da Oferta no carrossel de ofertas na Home
+Cypress.Commands.add('OfferButtonAssine_HOME', () => {
+    cy.get('#globoplay > .offer-card > .offer-card__front > .offer-card-front > .body > .offer-card-front__group-buttons > vtr-link.offer-card-front__group-buttons--plan > .vtr-input')
+        .click()
+        cy.url().should('contain', 'Pro-0279')
+})
+
+
+// -- Valida o botão Assine já da Oferta no carrossel de ofertas nas LPs
+Cypress.Commands.add('OfferButtonAssine_LP', () => {
+    cy.get('[aria-label="Filtro Todos"]').click()
+    cy.get('#splide01-slide01 > app-offer-card-new > .offer-card > .offer-card__front > .offer-card-front > .body > .offer-card-front__group-buttons > vtr-link.offer-card-front__group-buttons--plan > .vtr-input')
+        .click()
+    cy.url().wait(1500).should('contain', 'Pro-0279')
+})
+
+// -- Valida os links de Href dos botões Assine Já do carrossel de ofertas nas LPs
+Cypress.Commands.add('OfferHrefLinks_LP', () => {
+    cy.get('[aria-label="Filtro Todos"]').click()
+    cy.get('#splide01-list').get('a').each(page => {
+        cy.request(page.prop('href'))
+        })
+})
+
 
 Cypress.Commands.add('Button_VejaMaisOfertas',() => {
     cy.get('.redirect__btn > .vtr-input')
             .scrollIntoView()
             .should('be.visible')
             .click()
-            .url().should('eq', 'https://vitrine.globo.com/')
+            .url().should('eq', Cypress.env('VITRINE_HOME'))
             .go("back")        
 })
+
 
 
 Cypress.Commands.add('Button_FAQ',() => {
@@ -232,12 +275,12 @@ Cypress.Commands.add('Footer_Buttons', () => {
         .should('have.length', 3).and('be.visible')
     
     cy.contains('Minha conta')
-        .should('have.prop', 'href', 'https://vitrine.globo.com/%20//minhaconta.globo.com/')
+        .should('have.prop', 'href', 'https://vitrine-qa1.qa.globoi.com/%20//minhaconta.globo.com/')
         
     cy.contains('Política de Privacidade')
-        .should('have.prop', 'href', "https://vitrine.globo.com/%20//privacidade.globo.com/privacy-policy/")
+        .should('have.prop', 'href', "https://vitrine-qa1.qa.globoi.com/%20//privacidade.globo.com/privacy-policy/")
         
     cy.contains('Termos de uso')
-        .should('have.prop', 'href', 'https://vitrine.globo.com/%20//ajuda.globo/globoplay/termos-e-politicas/')
+        .should('have.prop', 'href', 'https://vitrine-qa1.qa.globoi.com/%20//ajuda.globo/globoplay/termos-e-politicas/')
 })
 

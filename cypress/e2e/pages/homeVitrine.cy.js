@@ -42,15 +42,11 @@ describe('Validating Offers', () => {
         cy.get('#globoplay > .offer-card > .offer-card__front > .offer-card-front > .body > .offer-card-front__group-buttons > vtr-link.offer-card-front__group-buttons--plan > .vtr-input')
             .click()
         cy.url().should('contain', 'Pro-0279')
-        cy.go('back')    
+        cy.go('back')
     
         
-        // cy.get('.offer-list').get('a').each(page => {
-        //     cy.request(page.prop('href'))
-        // })
+        cy.get('.offer-list').get('a').each(page => {
+            cy.request(page.prop('href'))
+        })
     })
-    
-
-
-
 })

@@ -10,6 +10,7 @@ describe('Default page test',() => {
     Cypress.on('uncaught:exception', (err, runnable) => {
         return false;
     })
+
     const menuList = [
         'Home',
         'Globoplay',
@@ -23,12 +24,13 @@ describe('Default page test',() => {
         'Apple TV+',
         'Combate'
     ] 
+    var contCard = 0
 
     // -- Neste bloco de testes está sendo validada a ordem da lista do Menu,
     it('Validanting Header Component', () => {
         cy.Menu() 
         
-        // -- Valida que a lista de páginas contém 11 itens 
+        // -- Valida se a lista de páginas contém 11 itens 
         //    e valida se a resposta de cada link das URL está retornando corretamente do endpoint 
         cy.get('.sidebar > ul')
             .children() 
@@ -62,28 +64,49 @@ describe('Default page test',() => {
     })
 
 
-    // -- Desativei este bloco de testes, pois estamos para receber uma mudança nesse componente de Filtros em breve
     it('Validating Filter Component', () => {
         cy.FilterTexts('Ofertas Globoplay com Deezer Premium', 'Explore os detalhes dos nossos produtos')
         cy.FilterDefault()
     })
 
-    it('Validating Offers Buttons', () => {
 
-        getAllRecommendations(Cypress.env('API_RECOMMENDATION_URL')).then((Response) => {
-            for(var index in Response.body.offers){
-                index++
-            }            
-            cy.get('[aria-label="Filtro Todos"]').click()
-            cy.get('#splide02-list').children().should('have.length',[index])
-            cy.get('#globoplay > .offer-card > .offer-card__front > .offer-card-front > .body > .offer-card-front__group-buttons > vtr-button.offer-card-front__group-buttons--plan > .vtr-button').click().and(cy.contains('Assine já')).click()
-            cy.get('#globoplay > .offer-card > .offer-card__back > .offer-card-back > .body > .offer-card-back__buttons > .offer-card-back__buttons--item > .vtr-input').click({force:true})
-        })
+    it('Validating Offer Buttons: Detalhes', () => {
+        cy.OfferButtonDetalhes_LP()
     })
 
 
+    it('Validating Offer Buttons: Assine', () => {
+        cy.OfferButtonAssine_LP()
+    })
+
+
+    it('Validating Offers Href', () => {
+        cy.OfferHrefLinks_LP()
+    })
+
+    // -- Valida se a quantidade de cards exibidos no carrossel está correta, 
+    //    fazendo um request para o endpoint e verificando os cards no front:
+    it('Validating Offer Cards', () => {
+        getAllRecommendations(Cypress.env('API_RECOMMENDATION_URL')).then((Response) => {
+            for(var index in Response.body.offers){
+                var offerName = (Response.body.offers[index].name)
+                var card = offerName.includes('Globoplay')
+                if(card == true){
+                    contCard ++
+                }
+                cy.log(contCard)
+            }
+
+            cy.get('#splide01-list').children()
+                .should('have.length', contCard)
+        })
+    })
+            
+        
+
+
     //Valida o botão Veja mais ofertas
-    it('Validating FAQ and More Offfers Buttons', () => {
+    it('Validating FAQ and More Offfer Buttons', () => {
         cy.Button_VejaMaisOfertas()
         cy.Button_FAQ()
     })
@@ -94,7 +117,6 @@ describe('Default page test',() => {
             .scrollIntoView()
             .should('contains.text', Cypress.env('ONE_ASTERISK'))
             .and('contains.text', Cypress.env('TWO_ASTERISK'))
-        //     .and('contains.text', Cypress.env('FIVE_ASTERISK')) // -- Desativado pq temos um BUG em prod! :D       
         cy.Footer_Buttons()
     })
 })
