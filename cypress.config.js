@@ -13,7 +13,7 @@ module.exports = {
     PRD: "vitrine.globo.com",
 
     VITRINE_HOME: "https://vitrine-qa1.qa.globoi.com/",
-    LOGIN_URL: "https://login.qa.globoi.com/login",
+    LOGIN_QA1: "https://login.qa.globoi.com/login/6999/connect-confirm?url=https%3A%2F%2Fid.qa.globoi.com%2Fauth%2Frealms%2Fglobo.com%2Flogin-actions%2Fauthenticate%3Fsession_code%3Dl7_Ulsb9iFKBagfWXFfGXujZ6nly-UVu-baK7IJZNLM%26execution%3D5f2f04e2-bc73-4057-9449-ddcd37df45e4%26client_id%3Dvitrine-globo%2540apps.globoid%26tab_id%3DmvdvBEfzyWI%26request-context%3DJkKo4w&error=&request-context=JkKo4w",
     DEEZER_PAGE: "https://vitrine.globo.com/assine/deezer-premium",
     TELECINE_PAGE: "https://vitrine.globo.com/assine/telecine",
     DISNEY_PAGE: "https://vitrine-qa1.qa.globoi.com/assine/disney",
@@ -21,7 +21,8 @@ module.exports = {
     WIDGET: "https://jv-qa1-vitrine-library.apps.tsuru.dev.gcp.i.globo/?",
 
     API_RECOMMENDATION_URL:
-      "https://jv-qa1-vitrine-bff.apps.tsuru.dev.gcp.i.globo/recommendation?",
+      //"https://jv-qa1-vitrine-bff.apps.tsuru.dev.gcp.i.globo/recommendation?globoId=",
+      "https://jv-qa1-vitrine-bff.apps.tsuru.dev.gcp.i.globo/recommendations?channel=w&globoId=",
 
     //URLs das LPs de TV:
     GP_SAMSUNG:
@@ -56,7 +57,7 @@ module.exports = {
     GLOBOID_GPCANAIS_ANUAL: "6c60afd5-489b-4cd3-855a-9a4093c9d8c0",
     EMAIL_GPCANAIS_ANUAL: "glbteste.avt.parcerias+1304@mailinator.com",
 
-    USER_PASSWORD: "12345678",
+    PASSWORD: "12345678",
 
 
     // -- Footers: Textos das páginas:

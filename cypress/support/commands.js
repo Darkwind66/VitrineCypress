@@ -78,8 +78,8 @@ Cypress.Commands.add('Menu', () => {
 })
 
 Cypress.Commands.add('MenuPagesRedirect', () => {
-    cy.get('ul > :nth-child(1)')
-            .should('contain.text', 'Home')
+    cy.contains('Home').parent()
+            //.should('contain.text', 'Home')
             .click('bottomLeft')
             .url().should('eq', 'https://vitrine-qa1.qa.globoi.com/')
             .go('back')
@@ -95,17 +95,24 @@ Cypress.Commands.add('LogoVitrine',() => {
 })
 
 
-Cypress.Commands.add('LoginButton',() => {
+/**
+ *  -- Esta função serve para testar uma suite inteira de testes com usuário logado.
+ *     Chamando ela por meio de um hook, podemos manter o teste de todos os itens da página como logado,
+ *     sem precisar fazer logout e login em cada execução de testes individuais 
+ */
+Cypress.Commands.add('login',(username, password) => {
+    cy.session([username = 'glbteste.avt.parcerias+1330@mailinator.com', 
+        password = Cypress.env('PASSWORD') ], () => {
+        cy.visit(Cypress.env('LOGIN_QA1'))
+
+        cy.get('#login').type(username)
+        cy.get('#password').type(password)
+        cy.get('.button').click()
+        cy.url().should('contain', 'finish')
+    })
     
-    cy.get('.text-user').click()
-    cy.get('.btn__enter').should('be.visible').click()
-
-    cy.url().should('contain', Cypress.env('LOGIN_URL'))
-    cy.go('back')
-
-    // cy.get('#login').type('vitrine.teste3@gmail.com')
-    // cy.get('#password').type('Teste@123')
-    // cy.get('.button').click()
+    
+    
 })
 
 
@@ -126,21 +133,27 @@ Cypress.Commands.add('fullscreenImage_Desktop',() => {
         })
 })
 
+// -- Esta função é do botão "Assine já" do componente fullscreen das páginas
+Cypress.Commands.add('FullscreenButtons_Checkout',(textCTA1, urlCTA1) => {
+    cy.get('vtr-link.offer-button > .vtr-input')
+        .scrollIntoView()
+        .should('be.visible')
+        .and()
+        .and('have.text', textCTA1) // especificar o texto ao chamar esta função na página
+        .click()
+        .url().should('contain.text', urlCTA1) // especificar o sku ao chamar esta função na página
+})
 
-Cypress.Commands.add('FullscreenButtons_Default',(textCTA) => {
+// -- Esta função é do botão "Conhecer Ofertas" do componente fullscreen das páginas
+Cypress.Commands.add('FullscreenButtons_KnowingOffers',(textCTA2) => {
     cy.get('.offer-button > .vtr-button')
         .scrollIntoView()
         .should('be.visible')
-        .and('have.text', textCTA)
+        .and('have.text', textCTA2)
         .click()
         
     // -- TODO
     // Validar a ação scrollDown após clicar no botão
-})
-
-
-Cypress.Commands.add('FullscreenButtons_Logged',() => {
-
 })
 
 
@@ -167,19 +180,23 @@ Cypress.Commands.add('FilterTexts',(Title, Subtitle) => {
             .and('have.text', Subtitle)
 })
 
+
 // -- Valida os botões do filtro para Deslogados e Logados Free
+//   Como regra, deslogados e logados free não possuem o filtro "Ofertas turbinadas",
+//   portanto o filtro pré-selecionado é o "Todos"
 Cypress.Commands.add('FilterDefault',() => {
     cy.get('.filter__list').children()
         .should('have.length', 4).then(($filt)=>{
             expect($filt[0]).have.text(' Todos ')
-            expect($filt[1]).have.class('active')
-            expect($filt[1]).have.text(' Ofertas turbinadas ')
-            expect($filt[2]).have.text(' Assinaturas globoplay ')
-            expect($filt[3]).have.text(' Ofertas combinadas ')
+            expect($filt[0]).have.class('active')
+            expect($filt[1]).have.text(' Assinaturas globoplay ')
+            expect($filt[2]).have.text(' Ofertas combinadas ')
         })
 })
 
 // -- Valida os botões do filtro para Assinantes Globoplay
+//   Já neste cenário, logados assinantes possuem o filtro "Ofertas turbinadas",
+//   portanto o filtro pré-selecionado é o "Ofertas turbinadas"
 Cypress.Commands.add('FilterSubscriber',() => {
     cy.get('.filter__list').children()
         .should('have.length', 4).then(($filt)=>{
